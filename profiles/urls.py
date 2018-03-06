@@ -23,9 +23,9 @@ redirect. If you don't use that name, remember to explicitly pass
 """
 
 try:
-  from django.conf.urls.defaults import patterns, url
+    from django.conf.urls.defaults import patterns, url
 except ImportError:
-  from django.conf.urls import patterns, url
+    from django.conf.urls import patterns, url
 
 from profiles import views
 

@@ -4,6 +4,7 @@ Views for creating, editing and viewing site-specific user profiles.
 """
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import Http404
@@ -114,9 +115,12 @@ def create_profile(request, form_class=None, success_url=None,
         context[key] = callable(value) and value() or value
     
     return render_to_response(template_name,
-                              { 'form': form },
+                              {'form': form},
                               context_instance=context)
+
+
 create_profile = login_required(create_profile)
+
 
 def edit_profile(request, form_class=None, success_url=None,
                  template_name='profiles/edit_profile.html',
@@ -205,10 +209,13 @@ def edit_profile(request, form_class=None, success_url=None,
         context[key] = callable(value) and value() or value
     
     return render_to_response(template_name,
-                              { 'form': form,
-                                'profile': profile_obj, },
+                              {'form': form,
+                               'profile': profile_obj, },
                               context_instance=context)
+
+
 edit_profile = login_required(edit_profile)
+
 
 def profile_detail(request, username, public_profile_field=None,
                    template_name='profiles/profile_detail.html',
@@ -280,7 +287,7 @@ def profile_detail(request, username, public_profile_field=None,
         context[key] = callable(value) and value() or value
     
     return render_to_response(template_name,
-                              { 'profile': profile_obj },
+                              {'profile': profile_obj},
                               context_instance=context)
 
 
